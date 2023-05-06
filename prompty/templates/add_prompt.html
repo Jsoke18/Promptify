@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Prompt</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <script src="https://cdn.skypack.dev/@supabase/supabase-js@latest"></script>
+
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <script src="/static/js/darkmode.js"></script>
+    <script src="/static/js/login.js"></script>
+    <script type="module" src="static/js/login.js"></script>
+  </head>
+  <body class="light-mode">
+    <nav class="navbar is-info" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/"> GPT Prompt Search </a>
+      </div>
+      <div class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item" href="/"> Home </a>
+          <a class="navbar-item" href="/add_prompt"> Add Prompt </a>
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <button id="authButton" class="button is-primary">
+                Log in / Sign up
+              </button>
+            </div>
+          </div>
+          <div class="navbar-item">
+            <a id="modeToggle">
+              <img
+                id="modeIcon"
+                src="/static/img/sun.svg"
+                alt="Switch mode"
+                width="24"
+                height="24"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <section class="section">
+      <div class="container">
+        {% if user %}
+        <h1 class="title">Add Prompt</h1>
+        <form method="POST" action="/add_prompt">
+          <div class="field">
+            <label class="label" for="title">Title</label>
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                name="title"
+                id="title"
+                placeholder="Title"
+                required
+              />
+            </div>
+          </div>
+          <div class="field">
+            <label class="label" for="text">Prompt Text</label>
+            <div class="control">
+              <textarea
+                class="textarea"
+                name="text"
+                id="text"
+                placeholder="Enter the prompt text"
+                required
+              ></textarea>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label" for="tags">Tags</label>
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                name="tags"
+                id="tags"
+                placeholder="Enter tags separated by commas"
+              />
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <button class="button is-info" type="submit">Submit</button>
+            </div>
+          </div>
+        </form>
+        {% else %}
+        <h1 class="title">Please log in to add prompts</h1>
+        {% endif %}
+      </div>
+    </section>
+    <script>
+      setupDarkModeToggle();
+      setupAuth();
+    </script>
+  </body>
+</html>
